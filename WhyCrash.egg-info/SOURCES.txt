@@ -1,0 +1,8 @@
+README.md
+setup.py
+WhyCrash/__init__.py
+WhyCrash.egg-info/PKG-INFO
+WhyCrash.egg-info/SOURCES.txt
+WhyCrash.egg-info/dependency_links.txt
+WhyCrash.egg-info/requires.txt
+WhyCrash.egg-info/top_level.txt
