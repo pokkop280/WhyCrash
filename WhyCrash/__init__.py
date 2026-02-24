@@ -109,7 +109,18 @@ Traceback:
 Пожалуйста, проанализируй эту ошибку и детально объясни на русском языке, почему она произошла.
 Пока что НЕ пиши исправленный код, только проанализируй и объясни причину проблемы."""
 
-    API_KEY = "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"
+    # Считываем API-ключ из системных переменных, чтобы он больше не лежал в коде
+    API_KEY = os.getenv("WHYCRASH_API_KEY") or os.getenv("OPENROUTER_API_KEY")
+    
+    if not API_KEY:
+        if RICH:
+            console.print(Panel("API-ключ не найден!\n\nУстановите системную переменную окружения [bold cyan]OPENROUTER_API_KEY[/bold cyan] или задайте её в коде:\n[bold yellow]import os\nos.environ['OPENROUTER_API_KEY'] = 'ваш_ключ'[/bold yellow]", border_style="red", title="Ошибка WhyCrash"))
+        else:
+            print(f"{RED}API-ключ не найден! Установите переменную окружения OPENROUTER_API_KEY.{RESET}")
+        
+        # Выводим стандартную ошибку, если нет ключа
+        sys.__excepthook__(exc_type, exc_value, exc_traceback)
+        return
 
     # ========= ПЕРВЫЙ ЗАПРОС К OPENROUTER =========
     messages = [{"role": "user", "content": first_prompt}]
